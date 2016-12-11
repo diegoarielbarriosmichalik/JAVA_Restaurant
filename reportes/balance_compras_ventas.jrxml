@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d0ff163c-b2bd-4cc8-ac6b-b1bdcfa73157">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="contado" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[$P{contado}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="credito" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[$P{credito}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="recibo" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[$P{recibo}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from reporte_balance_compras_ventas_por_facturas order by fecha]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="comprobante" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="compras" class="java.math.BigDecimal"/>
+	<field name="ventas" class="java.math.BigDecimal"/>
+	<variable name="compras" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{compras}]]></variableExpression>
+	</variable>
+	<variable name="Ventas" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{ventas}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="26" uuid="17d7d248-f824-4a45-8687-2561efd13e68"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Informe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="33" width="126" height="11" uuid="8373dccf-b7d7-46c0-8334-afbca40f24c4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Balance de compras ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="43" width="31" height="11" uuid="66fff701-4c12-42fb-aa84-77b1560a5f6f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="0" width="80" height="12" uuid="f61a88a6-9d44-467a-be68-41da30cf2902"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="12" uuid="c846a4cb-1a22-4e6a-88be-3081182bd8c3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="35" y="43" width="184" height="11" uuid="912e9423-d2fa-4139-948c-ce5ccf700c3e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement x="3" y="1" width="545" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="3f4a6a02-6df7-433d-b86a-2b2f449a1984"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="218" y="4" width="138" height="15" uuid="925a0a48-8d46-4a18-a290-705af7d1a0cc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="4" width="79" height="15" uuid="91f46887-6396-458e-8a0b-a7febff5ce8c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Compras	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="4" width="100" height="15" uuid="d371d2ae-2e3c-4fde-b2a5-63574faff5fa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="4" width="62" height="15" uuid="03e4e047-6c7e-46ce-a1a6-b6a975d8f24a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="469" y="4" width="79" height="15" uuid="97370123-988e-4782-9cf4-c75f747cabe6"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="66" y="0" width="152" height="11" uuid="37bae609-73b2-49a0-bf85-857985851e9c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="0" width="187" height="11" uuid="2f896f68-9d65-457d-8f44-223cb8aa2339"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="400" y="0" width="55" height="11" uuid="3000dad8-8d56-4165-8b1c-c3c5fcbb0262"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="10" y="0" width="56" height="11" uuid="b6ad6d3e-70b3-464b-951f-a2f3c48f360a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="477" y="0" width="55" height="11" uuid="b251a770-b8c1-420d-802e-3ab77f4d3a2b"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="89" splitType="Stretch">
+			<line>
+				<reportElement x="352" y="4" width="180" height="1" uuid="9315c263-8438-4365-8371-b1e8e0649b82"/>
+			</line>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="445" y="8" width="87" height="16" uuid="f6e5b67e-3876-44d4-846c-326d888d8f17"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compras}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="297" y="38" width="175" height="12" uuid="7303f3f2-463f-42e1-ba02-6cb08096381f"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contado:]]></text>
+			</staticText>
+			<textField pattern="#,##0;-#,##0" isBlankWhenNull="true">
+				<reportElement x="445" y="38" width="87" height="12" uuid="48327f80-b5aa-4686-a672-6600708d2f4b"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{contado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="297" y="49" width="175" height="12" uuid="df69a3a0-9b6e-428b-a972-509f83a23e03"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Crédito:]]></text>
+			</staticText>
+			<textField pattern="#,##0;-#,##0" isBlankWhenNull="true">
+				<reportElement x="445" y="49" width="87" height="12" uuid="edaf3264-5307-4374-9874-72cfff9ab45a"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{credito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="352" y="8" width="100" height="16" uuid="7fca07c0-0349-4a44-8d56-45e870bff18c"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total compras:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="23" width="175" height="16" uuid="79dbf42f-4fc5-4e49-993e-6c7ec88c1827"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total ventas:]]></text>
+			</staticText>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="445" y="23" width="87" height="16" uuid="66691eab-004b-4665-be89-7b7f572c2238"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{contado}+$P{credito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="297" y="60" width="175" height="12" uuid="2b98860f-9e6c-4a01-bb93-9b0d2d5b1f9b"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Recibo de dinero:]]></text>
+			</staticText>
+			<textField pattern="#,##0;-#,##0" isBlankWhenNull="true">
+				<reportElement x="445" y="60" width="87" height="12" uuid="717166b9-ad8f-4f0b-a0ff-b8b1fed4b35b"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{recibo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

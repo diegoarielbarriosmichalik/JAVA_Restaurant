@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura_con_logo_detalle" language="groovy" pageWidth="595" pageHeight="100" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4cd9b4bc-09b6-48aa-a9cf-ab30fd6e415f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select productos.nombre, cuenta.obs, cuenta_detalle.cantidad, cuenta_detalle.precio, cuenta_detalle.diez, cuenta_detalle.cinco, cuenta_detalle.exentas
+from cuenta
+inner join cuenta_detalle on
+cuenta.id_cuenta = cuenta_detalle.id_cuenta
+inner join productos on
+productos.id_producto = cuenta_detalle.id_producto
+where print = '1']]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="cantidad" class="java.math.BigDecimal"/>
+	<field name="precio" class="java.lang.Long"/>
+	<field name="diez" class="java.lang.Long"/>
+	<field name="cinco" class="java.lang.Long"/>
+	<field name="exentas" class="java.lang.Long"/>
+	<variable name="suma_diez" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{diez}]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{suma_diez}]]></variableExpression>
+	</variable>
+	<variable name="suma_cinco" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{cinco}]]></variableExpression>
+	</variable>
+	<variable name="suma_exentas" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{exentas}]]></variableExpression>
+	</variable>
+	<variable name="iva_10" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{suma_diez}/11]]></variableExpression>
+	</variable>
+	<variable name="iva_5" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{suma_cinco}/21]]></variableExpression>
+	</variable>
+	<variable name="total_iva" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{iva_10}+$V{iva_5}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField>
+				<reportElement x="49" y="0" width="322" height="8" uuid="96dfed08-c646-4db5-9533-177f5d8228c3"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="396" y="0" width="46" height="8" uuid="4c578429-09cb-4408-9cc3-bd2efa14a68b"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exentas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="445" y="0" width="46" height="8" uuid="6040cf27-a971-4d92-8fe1-4c586e6ca615"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cinco}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="509" y="0" width="34" height="8" uuid="081829bb-1501-48a3-9696-515292841afa"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diez}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="346" y="0" width="46" height="8" uuid="b631ed75-cc98-4b0d-a2e1-d11da9ab400c"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="16" y="0" width="19" height="8" uuid="408ea7d9-41ce-48a1-86db-23dbe992c779"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

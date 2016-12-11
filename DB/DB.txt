@@ -1,0 +1,1246 @@
+--
+-- ER/Studio 8.0 SQL Code Generation
+-- Company :      Online
+-- Project :      stock 1.0.dm1
+-- Author :       Dell
+--
+-- Date Created : Tuesday, November 08, 2016 13:26:09
+-- Target DBMS : PostgreSQL 8.0
+--
+
+-- 
+-- TABLE: auditoria 
+--
+
+CREATE TABLE auditoria(
+    id_auditoria    char(10)    NOT NULL,
+    id_usuario      int4        NOT NULL,
+    id_tabla        char(10)    NOT NULL,
+    id_cambio       char(10)    NOT NULL,
+    fecha           char(10),
+    CONSTRAINT "PK17" PRIMARY KEY (id_auditoria)
+)
+;
+
+
+
+-- 
+-- TABLE: baja 
+--
+
+CREATE TABLE baja(
+    id_baja        int4              NOT NULL,
+    id_producto    int4              NOT NULL,
+    cantidad       numeric(18, 0),
+    motivo         char(100),
+    fecha          char(100),
+    borrado        char(2),
+    id_comercio    int4              NOT NULL,
+    CONSTRAINT "PK22" PRIMARY KEY (id_baja)
+)
+;
+
+
+
+-- 
+-- TABLE: caja 
+--
+
+CREATE TABLE caja(
+    id_caja    int4    NOT NULL,
+    fecha      date    NOT NULL,
+    monto      int8,
+    borrado    int4,
+    CONSTRAINT "PK27" PRIMARY KEY (id_caja)
+)
+;
+
+
+
+-- 
+-- TABLE: cambio 
+--
+
+CREATE TABLE cambio(
+    id_cambio    char(10)    NOT NULL,
+    cambio       char(10),
+    CONSTRAINT "PK18" PRIMARY KEY (id_cambio)
+)
+;
+
+
+
+-- 
+-- TABLE: cliente 
+--
+
+CREATE TABLE cliente(
+    id_cliente       int4              NOT NULL,
+    nombre           char(100),
+    direccion        char(100),
+    telefono         char(100),
+    obs              char(100),
+    borrado          char(2),
+    ruc              char(100),
+    id_comercio      int4              NOT NULL,
+    email            char(100),
+    ver_historial    int4,
+    cumpleanos       date,
+    ci               numeric(20, 0),
+    borrado_int      int4,
+    empresa          char(100),
+    ruc_empresa      char(100),
+    CONSTRAINT "PK1" PRIMARY KEY (id_cliente)
+)
+;
+
+
+
+-- 
+-- TABLE: clientes_pedidos 
+--
+
+CREATE TABLE clientes_pedidos(
+    id_clientes_pedidos    char(10)    NOT NULL,
+    nombre                 char(10),
+    CONSTRAINT "PK37" PRIMARY KEY (id_clientes_pedidos)
+)
+;
+
+
+
+-- 
+-- TABLE: comercio 
+--
+
+CREATE TABLE comercio(
+    id_comercio    int4         NOT NULL,
+    nombre         char(100),
+    direccion      char(100),
+    ruc            char(100),
+    telefono       char(100),
+    estado         int4,
+    email          char(100),
+    CONSTRAINT "PK35" PRIMARY KEY (id_comercio)
+)
+;
+
+
+
+-- 
+-- TABLE: compras 
+--
+
+CREATE TABLE compras(
+    id_compras      int4         NOT NULL,
+    id_producto     int4         NOT NULL,
+    id_proveedor    int4         NOT NULL,
+    precio          int8,
+    factura         char(100),
+    fecha           char(100),
+    cantidad        int4,
+    borrado         char(2),
+    estado          int4,
+    id_comercio     int4         NOT NULL,
+    CONSTRAINT "PK11" PRIMARY KEY (id_compras)
+)
+;
+
+
+
+-- 
+-- TABLE: compraventa 
+--
+
+CREATE TABLE compraventa(
+    id_compraventa    int4              NOT NULL,
+    id_producto       int4              NOT NULL,
+    compra            numeric(18, 0),
+    venta             numeric(18, 0),
+    resultado         numeric(18, 0),
+    venta_suma        int8,
+    compra_suma       int8,
+    producto          char(100),
+    id_comercio       int4              NOT NULL,
+    CONSTRAINT "PK30" PRIMARY KEY (id_compraventa)
+)
+;
+
+
+
+-- 
+-- TABLE: configuracion 
+--
+
+CREATE TABLE configuracion(
+    id_configuracion                      int4              NOT NULL,
+    tipo                                  int4,
+    factura                               int4,
+    imagenes                              int4,
+    precio_automatico                     int4,
+    porcentaje                            int4,
+    barcode                               int4,
+    id_comercio                           int4              NOT NULL,
+    peso                                  int4,
+    dolar                                 int4,
+    real_moneda                           int4,
+    libreta                               int4,
+    conexion                              int4,
+    timbrado                              numeric(20, 0),
+    timbrado_vencimiento                  date,
+    timbrado_inicio_vigencia              date,
+    pedidos                               int4,
+    habilitar_pagado_en_cuenta_detalle    int4,
+    alerta_stock                          int4,
+    ventas_a_credito                      int4,
+    habilitar_facturacion                 int4,
+    productos_por_factura                 int4,
+    habilitar_medio_de_pago               int4,
+    CONSTRAINT "PK33" PRIMARY KEY (id_configuracion)
+)
+;
+
+
+
+-- 
+-- TABLE: control_de_acceso 
+--
+
+CREATE TABLE control_de_acceso(
+    id_control               int4              NOT NULL,
+    id_usuario               int4              NOT NULL,
+    ventas                   int4,
+    caja                     int4,
+    informes                 int4,
+    compras                  int4,
+    clientes                 int4,
+    productos                int4,
+    proveedores              int4,
+    sucursal_numero          char(3),
+    caja_numero              char(3),
+    privilegio               int4,
+    ultima_factura           numeric(10, 0),
+    habilitar_facturacion    int4,
+    CONSTRAINT "PK49" PRIMARY KEY (id_control)
+)
+;
+
+
+
+-- 
+-- TABLE: cuenta 
+--
+
+CREATE TABLE cuenta(
+    id_cuenta             int4         NOT NULL,
+    id_cliente            int4         NOT NULL,
+    id_estado             int4         NOT NULL,
+    total                 int8,
+    fecha                 char(100),
+    obs                   char(100),
+    exentas               int8,
+    cinco                 int8,
+    diez                  int8,
+    factura               char(100),
+    dinero                char(100),
+    vuelto                char(100),
+    id_usuario            char(100),
+    print                 int4,
+    id_comercio           int4         NOT NULL,
+    tipo                  int4         NOT NULL,
+    fecha_date            date,
+    generar_recibo        int4,
+    generar_recibo_str    char(100),
+    CONSTRAINT "PK3" PRIMARY KEY (id_cuenta)
+)
+;
+
+
+
+-- 
+-- TABLE: cuenta_detalle 
+--
+
+CREATE TABLE cuenta_detalle(
+    id_cuenta_detalle    int4              NOT NULL,
+    id_cuenta            int4              NOT NULL,
+    id_producto          int4              NOT NULL,
+    precio               int8,
+    cantidad             numeric(18, 0),
+    total                numeric(18, 0),
+    fecha                char(100),
+    borrado              char(2),
+    exentas              numeric(18, 0),
+    cinco                numeric(18, 0),
+    diez                 numeric(18, 0),
+    descuento            char(100),
+    cuotas               char(100),
+    tipo_venta           int4,
+    borrado_int          int4              NOT NULL,
+    fecha_date           date,
+    pagado               int4,
+    pagado_str           char(20),
+    CONSTRAINT "PK4" PRIMARY KEY (id_cuenta_detalle)
+)
+;
+
+
+
+-- 
+-- TABLE: cuenta_detalle_de_pagos 
+--
+
+CREATE TABLE cuenta_detalle_de_pagos(
+    id_cuenta_detalle_de_pagos    int4              NOT NULL,
+    id_cuenta                     int4              NOT NULL,
+    id_tipo_de_pago               int4              NOT NULL,
+    descripcion                   char(100)         NOT NULL,
+    numero                        char(100),
+    total                         numeric(10, 0),
+    CONSTRAINT "PK52" PRIMARY KEY (id_cuenta_detalle_de_pagos)
+)
+;
+
+
+
+-- 
+-- TABLE: cuentas_a_cobrar 
+--
+
+CREATE TABLE cuentas_a_cobrar(
+    id_cuentas_a_cobrar    int4              NOT NULL,
+    id_cliente             int4,
+    nombre                 text,
+    deuda                  numeric(10, 0),
+    CONSTRAINT "PK58" PRIMARY KEY (id_cuentas_a_cobrar)
+)
+;
+
+
+
+-- 
+-- TABLE: cuotas 
+--
+
+CREATE TABLE cuotas(
+    id_cuota        int4         NOT NULL,
+    id_cliente      int4         NOT NULL,
+    total_deuda     int8,
+    total_pagado    int8,
+    obs             char(100),
+    borrado         char(10),
+    CONSTRAINT "PK24" PRIMARY KEY (id_cuota)
+)
+;
+
+
+
+-- 
+-- TABLE: detalle_cuotas 
+--
+
+CREATE TABLE detalle_cuotas(
+    id_detalle_cuotas    int4         NOT NULL,
+    numero               int4,
+    entrega              int8,
+    saldo                int8,
+    fecha                char(100),
+    borrado              char(2),
+    id_cuota             int4         NOT NULL,
+    CONSTRAINT "PK26" PRIMARY KEY (id_detalle_cuotas)
+)
+;
+
+
+
+-- 
+-- TABLE: estado 
+--
+
+CREATE TABLE estado(
+    id_estado    int4         NOT NULL,
+    estado       char(100),
+    CONSTRAINT "PK5" PRIMARY KEY (id_estado)
+)
+;
+
+
+
+-- 
+-- TABLE: facturas_compra 
+--
+
+CREATE TABLE facturas_compra(
+    id_facturas_compra    int4              NOT NULL,
+    numero                char(100),
+    fecha                 char(100),
+    estado                int4,
+    borrado               int4,
+    id_proveedor          int4              NOT NULL,
+    activo                int4,
+    id_comercio           int4              NOT NULL,
+    fecha_date            date,
+    total                 numeric(10, 0),
+    CONSTRAINT "PK31" PRIMARY KEY (id_facturas_compra)
+)
+;
+
+
+
+-- 
+-- TABLE: facturas_compra_detalle 
+--
+
+CREATE TABLE facturas_compra_detalle(
+    id_facturas_compra_detalle    int4              NOT NULL,
+    cantidad                      numeric(10, 2),
+    precio                        numeric(10, 2),
+    borrado                       int4,
+    id_facturas_compra            int4              NOT NULL,
+    id_producto                   int4              NOT NULL,
+    total                         numeric(10, 0),
+    fecha                         date,
+    CONSTRAINT "PK32" PRIMARY KEY (id_facturas_compra_detalle)
+)
+;
+
+
+
+-- 
+-- TABLE: imprimir_cuenta_pie 
+--
+
+CREATE TABLE imprimir_cuenta_pie(
+    id              int4              NOT NULL,
+    id_cuenta       int4,
+    iva0            numeric(10, 0),
+    iva5            numeric(10, 0),
+    iva10           numeric(10, 0),
+    total           numeric(10, 0),
+    total_letras    char(200),
+    total_iva       numeric(10, 0),
+    CONSTRAINT "PK47" PRIMARY KEY (id)
+)
+;
+
+
+
+-- 
+-- TABLE: iva 
+--
+
+CREATE TABLE iva(
+    id_iva    int4    NOT NULL,
+    iva       int4,
+    CONSTRAINT "PK23" PRIMARY KEY (id_iva)
+)
+;
+
+
+
+-- 
+-- TABLE: pagares 
+--
+
+CREATE TABLE pagares(
+    id_pagare            int4              NOT NULL,
+    nro                  int4,
+    moneda               char(100),
+    cantidad             numeric(10, 2),
+    dia                  char(100),
+    mes                  char(100),
+    anho                 char(10),
+    venc_dia             char(100),
+    venc_mes             char(100),
+    venc_anho            char(100),
+    cliente              char(100),
+    cantidad_letras      text,
+    recibo_en            char(100),
+    recibo_a             char(100),
+    interes              char(18),
+    comision             char(10),
+    desu                 char(100),
+    borrado              int4,
+    activa               int4,
+    dia2                 char(100),
+    mes2                 char(100),
+    anho2                char(100),
+    dia_semana1          char(100),
+    dia_semana2          char(100),
+    estado               int4,
+    nro_str              char(100),
+    moneda_short         char(10),
+    fecha                date,
+    fecha_vencimiento    date,
+    interes_int          int4,
+    comision_int         int4,
+    CONSTRAINT "PK30_1" PRIMARY KEY (id_pagare)
+)
+;
+
+
+
+-- 
+-- TABLE: pagares_detalle 
+--
+
+CREATE TABLE pagares_detalle(
+    id_pagares_detalles    int4         NOT NULL,
+    id_pagare              int4         NOT NULL,
+    cliente                int4,
+    empresa                char(200),
+    CONSTRAINT "PK31_1" PRIMARY KEY (id_pagares_detalles)
+)
+;
+
+
+
+-- 
+-- TABLE: parametro 
+--
+
+CREATE TABLE parametro(
+    id_parametro    int4    NOT NULL,
+    anho            int4,
+    impresora       int4,
+    CONSTRAINT "PK29" PRIMARY KEY (id_parametro)
+)
+;
+
+
+
+-- 
+-- TABLE: pedido 
+--
+
+CREATE TABLE pedido(
+    id_pedido       int4    NOT NULL,
+    id_proveedor    int4,
+    estado          int4,
+    id_comercio     int4,
+    activo          int4,
+    CONSTRAINT "PK38" PRIMARY KEY (id_pedido)
+)
+;
+
+
+
+-- 
+-- TABLE: pedido_detalle 
+--
+
+CREATE TABLE pedido_detalle(
+    id_pedido_detalle    int4    NOT NULL,
+    id_pedido            int4    NOT NULL,
+    id_producto          int4,
+    cantidad             int4,
+    precio               int4,
+    borrado              int4,
+    id_comercio          int4,
+    CONSTRAINT "PK39" PRIMARY KEY (id_pedido_detalle)
+)
+;
+
+
+
+-- 
+-- TABLE: pedido_interno 
+--
+
+CREATE TABLE pedido_interno(
+    id_pedido_interno    int4         NOT NULL,
+    id_cliente           int4         NOT NULL,
+    fecha                date,
+    estado               int4,
+    descripcion          char(200),
+    CONSTRAINT "PK41" PRIMARY KEY (id_pedido_interno)
+)
+;
+
+
+
+-- 
+-- TABLE: pedido_interno_detalle 
+--
+
+CREATE TABLE pedido_interno_detalle(
+    id_pedido_interno_detalle    int4              NOT NULL,
+    id_pedido_interno            int4              NOT NULL,
+    id_producto                  int4              NOT NULL,
+    unidades                     float8,
+    precio                       numeric(10, 0),
+    total                        numeric(10, 0),
+    estado                       int4,
+    CONSTRAINT "PK42" PRIMARY KEY (id_pedido_interno_detalle)
+)
+;
+
+
+
+-- 
+-- TABLE: pedidos 
+--
+
+CREATE TABLE pedidos(
+    id_pedido              int4        NOT NULL,
+    id_clientes_pedidos    char(10)    NOT NULL,
+    id_comercio            int4        NOT NULL,
+    id_producto            int4        NOT NULL,
+    cantidad               int4,
+    estado                 int4,
+    borrado                int4,
+    CONSTRAINT "PK36" PRIMARY KEY (id_pedido)
+)
+;
+
+
+
+-- 
+-- TABLE: productos 
+--
+
+CREATE TABLE productos(
+    id_producto               int4              NOT NULL,
+    id_proveedor              int4              NOT NULL,
+    nombre                    char(100),
+    codigo                    char(100),
+    precio                    int8,
+    id_iva                    int4              NOT NULL,
+    stock                     numeric(18, 0),
+    stock_ideal               int4,
+    stock_bajo                int4,
+    ubicacion                 char(100),
+    obs                       char(100),
+    borrado                   char(2),
+    id_comercio               int4              NOT NULL,
+    dir_imagen                text,
+    vencimiento               char(100),
+    borrado_int               int4,
+    id_productos_tipo         int4              NOT NULL,
+    vencimiento_date          date,
+    porcentaje                int4,
+    id_productos_ubicacion    int4              NOT NULL,
+    CONSTRAINT "PK2" PRIMARY KEY (id_producto)
+)
+;
+
+
+
+-- 
+-- TABLE: productos_tipo 
+--
+
+CREATE TABLE productos_tipo(
+    id_productos_tipo    int4         NOT NULL,
+    productos_tipo       char(100),
+    id_comercio          int4         NOT NULL,
+    CONSTRAINT "PK44" PRIMARY KEY (id_productos_tipo)
+)
+;
+
+
+
+-- 
+-- TABLE: productos_ubicacion 
+--
+
+CREATE TABLE productos_ubicacion(
+    id_productos_ubicacion    int4         NOT NULL,
+    ubicacion                 char(255),
+    borrado                   int4,
+    CONSTRAINT "PK56" PRIMARY KEY (id_productos_ubicacion)
+)
+;
+
+
+
+-- 
+-- TABLE: proveedor 
+--
+
+CREATE TABLE proveedor(
+    id_proveedor         int4         NOT NULL,
+    nombre               char(100),
+    telefono             char(100),
+    ruc                  char(100),
+    descripcion          char(100),
+    direccion            char(100),
+    nombre_vendedor      char(100),
+    telefono_vendedor    char(100),
+    borrado              char(2),
+    id_comercio          int4         NOT NULL,
+    borrado_int          int4,
+    CONSTRAINT "PK8" PRIMARY KEY (id_proveedor)
+)
+;
+
+
+
+-- 
+-- TABLE: recibo_de_dinero 
+--
+
+CREATE TABLE recibo_de_dinero(
+    id_recibo_de_dinero    int4              NOT NULL,
+    id_cliente             int4              NOT NULL,
+    fecha                  date,
+    numero                 char(100),
+    concepto               char(200),
+    efectivo               int4,
+    cheque                 int4,
+    extraccion             int4,
+    deposito               int4,
+    retencion              int4,
+    total                  numeric(10, 0),
+    total_str              text,
+    CONSTRAINT "PK48_1" PRIMARY KEY (id_recibo_de_dinero)
+)
+;
+
+
+
+-- 
+-- TABLE: recibo_de_dinero_detalle 
+--
+
+CREATE TABLE recibo_de_dinero_detalle(
+    id_recibo_de_dinero_detalle    int4    NOT NULL,
+    id_recibo_de_dinero            int4    NOT NULL,
+    id_cuenta                      int4    NOT NULL,
+    CONSTRAINT "PK49_1" PRIMARY KEY (id_recibo_de_dinero_detalle)
+)
+;
+
+
+
+-- 
+-- TABLE: recibos 
+--
+
+CREATE TABLE recibos(
+    id_recibo           int4    NOT NULL,
+    id_cliente          int4    NOT NULL,
+    concepto            text,
+    dinero_entregado    int4,
+    fecha               date,
+    dinero_letras       text,
+    borrado             int4,
+    activa              int4,
+    CONSTRAINT "PK29_1" PRIMARY KEY (id_recibo)
+)
+;
+
+
+
+-- 
+-- TABLE: reporte_balance_compras_ventas_por_facturas 
+--
+
+CREATE TABLE reporte_balance_compras_ventas_por_facturas(
+    id             int4              NOT NULL,
+    fecha          date,
+    comprobante    char(100),
+    descripcion    char(200),
+    compras        numeric(10, 0),
+    ventas         numeric(10, 0),
+    CONSTRAINT "PK48" PRIMARY KEY (id)
+)
+;
+
+
+
+-- 
+-- TABLE: reporte_compras 
+--
+
+CREATE TABLE reporte_compras(
+    id           int4              NOT NULL,
+    proveedor    char(100),
+    factura      char(100),
+    fecha        date,
+    total        numeric(10, 0),
+    CONSTRAINT "PK45" PRIMARY KEY (id)
+)
+;
+
+
+
+-- 
+-- TABLE: reporte_estado_de_resultado 
+--
+
+CREATE TABLE reporte_estado_de_resultado(
+    id                  int4              NOT NULL,
+    producto            char(100),
+    unidades_compras    numeric(10, 4),
+    unidades_ventas     numeric(10, 4),
+    fecha_desde         date,
+    fecha_hasta         date,
+    resultado           numeric(10, 4),
+    CONSTRAINT "PK46" PRIMARY KEY (id)
+)
+;
+
+
+
+-- 
+-- TABLE: reporte_historial_cliente 
+--
+
+CREATE TABLE reporte_historial_cliente(
+    id          int4              NOT NULL,
+    cliente     char(100),
+    fecha       char(100),
+    producto    char(100),
+    unidades    numeric(10, 0),
+    total       numeric(10, 0),
+    CONSTRAINT "PK43" PRIMARY KEY (id)
+)
+;
+
+
+
+-- 
+-- TABLE: reporte_ventas_productos 
+--
+
+CREATE TABLE reporte_ventas_productos(
+    id               int4              NOT NULL,
+    producto         char(200),
+    cantidad         numeric(18, 0),
+    fecha_de         date,
+    fecha_a          date,
+    precio           numeric(10, 0),
+    total            numeric(10, 0),
+    comprobante      char(100),
+    cliente          char(200),
+    fecha            date,
+    tipo_de_venta    char(100),
+    CONSTRAINT "PK40" PRIMARY KEY (id)
+)
+;
+
+
+
+-- 
+-- TABLE: reportecaja 
+--
+
+CREATE TABLE reportecaja(
+    id_reporte_caja    int4              NOT NULL,
+    comprobante        char(100),
+    factura            char(100),
+    cliente            char(100),
+    fecha              date,
+    contado            numeric(10, 0),
+    recibo             numeric(10, 0),
+    credito            numeric(10, 0),
+    CONSTRAINT "PK28" PRIMARY KEY (id_reporte_caja)
+)
+;
+
+
+
+-- 
+-- TABLE: tabla 
+--
+
+CREATE TABLE tabla(
+    id_tabla    char(10)    NOT NULL,
+    tabla       char(10),
+    CONSTRAINT "PK19" PRIMARY KEY (id_tabla)
+)
+;
+
+
+
+-- 
+-- TABLE: tipo_de_pago 
+--
+
+CREATE TABLE tipo_de_pago(
+    id_tipo_de_pago    int4         NOT NULL,
+    tipo_de_pago       char(100),
+    CONSTRAINT "PK53" PRIMARY KEY (id_tipo_de_pago)
+)
+;
+
+
+
+-- 
+-- TABLE: usuario 
+--
+
+CREATE TABLE usuario(
+    id_usuario     int4         NOT NULL,
+    nombre         char(100),
+    contrasenha    char(100),
+    privilegio     int4,
+    id_comercio    int4         NOT NULL,
+    nombre_real    char(100),
+    CONSTRAINT "PK16" PRIMARY KEY (id_usuario)
+)
+;
+
+
+
+-- 
+-- TABLE: auditoria 
+--
+
+ALTER TABLE auditoria ADD CONSTRAINT "Reftabla14" 
+    FOREIGN KEY (id_tabla)
+    REFERENCES tabla(id_tabla)
+;
+
+ALTER TABLE auditoria ADD CONSTRAINT "Refusuario15" 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario(id_usuario)
+;
+
+ALTER TABLE auditoria ADD CONSTRAINT "Refcambio16" 
+    FOREIGN KEY (id_cambio)
+    REFERENCES cambio(id_cambio)
+;
+
+
+-- 
+-- TABLE: baja 
+--
+
+ALTER TABLE baja ADD CONSTRAINT "Refproductos17" 
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+;
+
+ALTER TABLE baja ADD CONSTRAINT "Refcomercio37" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: cliente 
+--
+
+ALTER TABLE cliente ADD CONSTRAINT "Refcomercio35" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: compras 
+--
+
+ALTER TABLE compras ADD CONSTRAINT "Refproductos12" 
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+;
+
+ALTER TABLE compras ADD CONSTRAINT "Refproveedor13" 
+    FOREIGN KEY (id_proveedor)
+    REFERENCES proveedor(id_proveedor)
+;
+
+ALTER TABLE compras ADD CONSTRAINT "Refcomercio33" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: compraventa 
+--
+
+ALTER TABLE compraventa ADD CONSTRAINT "Refproductos23" 
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+;
+
+ALTER TABLE compraventa ADD CONSTRAINT "Refcomercio34" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: configuracion 
+--
+
+ALTER TABLE configuracion ADD CONSTRAINT "Refcomercio28" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: control_de_acceso 
+--
+
+ALTER TABLE control_de_acceso ADD CONSTRAINT "Refusuario50" 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario(id_usuario)
+;
+
+
+-- 
+-- TABLE: cuenta 
+--
+
+ALTER TABLE cuenta ADD CONSTRAINT "Refestado5" 
+    FOREIGN KEY (id_estado)
+    REFERENCES estado(id_estado)
+;
+
+ALTER TABLE cuenta ADD CONSTRAINT "Refcomercio30" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+ALTER TABLE cuenta ADD CONSTRAINT "Refcliente1" 
+    FOREIGN KEY (id_cliente)
+    REFERENCES cliente(id_cliente)
+;
+
+
+-- 
+-- TABLE: cuenta_detalle 
+--
+
+ALTER TABLE cuenta_detalle ADD CONSTRAINT "Refproductos3" 
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+;
+
+ALTER TABLE cuenta_detalle ADD CONSTRAINT "Refcuenta10" 
+    FOREIGN KEY (id_cuenta)
+    REFERENCES cuenta(id_cuenta)
+;
+
+
+-- 
+-- TABLE: cuenta_detalle_de_pagos 
+--
+
+ALTER TABLE cuenta_detalle_de_pagos ADD CONSTRAINT "Reftipo_de_pago54" 
+    FOREIGN KEY (id_tipo_de_pago)
+    REFERENCES tipo_de_pago(id_tipo_de_pago)
+;
+
+ALTER TABLE cuenta_detalle_de_pagos ADD CONSTRAINT "Refcuenta55" 
+    FOREIGN KEY (id_cuenta)
+    REFERENCES cuenta(id_cuenta)
+;
+
+
+-- 
+-- TABLE: cuotas 
+--
+
+ALTER TABLE cuotas ADD CONSTRAINT "Refcliente20" 
+    FOREIGN KEY (id_cliente)
+    REFERENCES cliente(id_cliente)
+;
+
+
+-- 
+-- TABLE: detalle_cuotas 
+--
+
+ALTER TABLE detalle_cuotas ADD CONSTRAINT "Refcuotas21" 
+    FOREIGN KEY (id_cuota)
+    REFERENCES cuotas(id_cuota)
+;
+
+
+-- 
+-- TABLE: facturas_compra 
+--
+
+ALTER TABLE facturas_compra ADD CONSTRAINT "Refproveedor25" 
+    FOREIGN KEY (id_proveedor)
+    REFERENCES proveedor(id_proveedor)
+;
+
+ALTER TABLE facturas_compra ADD CONSTRAINT "Refcomercio36" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: facturas_compra_detalle 
+--
+
+ALTER TABLE facturas_compra_detalle ADD CONSTRAINT "Refproductos26" 
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+;
+
+ALTER TABLE facturas_compra_detalle ADD CONSTRAINT "Reffacturas_compra27" 
+    FOREIGN KEY (id_facturas_compra)
+    REFERENCES facturas_compra(id_facturas_compra)
+;
+
+
+-- 
+-- TABLE: pagares_detalle 
+--
+
+ALTER TABLE pagares_detalle ADD CONSTRAINT "Refpagares56" 
+    FOREIGN KEY (id_pagare)
+    REFERENCES pagares(id_pagare)
+;
+
+
+-- 
+-- TABLE: pedido_detalle 
+--
+
+ALTER TABLE pedido_detalle ADD CONSTRAINT "Refpedido44" 
+    FOREIGN KEY (id_pedido)
+    REFERENCES pedido(id_pedido)
+;
+
+
+-- 
+-- TABLE: pedido_interno 
+--
+
+ALTER TABLE pedido_interno ADD CONSTRAINT "Refcliente45" 
+    FOREIGN KEY (id_cliente)
+    REFERENCES cliente(id_cliente)
+;
+
+
+-- 
+-- TABLE: pedido_interno_detalle 
+--
+
+ALTER TABLE pedido_interno_detalle ADD CONSTRAINT "Refpedido_interno46" 
+    FOREIGN KEY (id_pedido_interno)
+    REFERENCES pedido_interno(id_pedido_interno)
+;
+
+ALTER TABLE pedido_interno_detalle ADD CONSTRAINT "Refproductos47" 
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+;
+
+
+-- 
+-- TABLE: pedidos 
+--
+
+ALTER TABLE pedidos ADD CONSTRAINT "Refcomercio40" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+ALTER TABLE pedidos ADD CONSTRAINT "Refproductos41" 
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+;
+
+ALTER TABLE pedidos ADD CONSTRAINT "Refclientes_pedidos43" 
+    FOREIGN KEY (id_clientes_pedidos)
+    REFERENCES clientes_pedidos(id_clientes_pedidos)
+;
+
+
+-- 
+-- TABLE: productos 
+--
+
+ALTER TABLE productos ADD CONSTRAINT "Refproveedor11" 
+    FOREIGN KEY (id_proveedor)
+    REFERENCES proveedor(id_proveedor)
+;
+
+ALTER TABLE productos ADD CONSTRAINT "Refiva18" 
+    FOREIGN KEY (id_iva)
+    REFERENCES iva(id_iva)
+;
+
+ALTER TABLE productos ADD CONSTRAINT "Refcomercio32" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+ALTER TABLE productos ADD CONSTRAINT "Refproductos_tipo48" 
+    FOREIGN KEY (id_productos_tipo)
+    REFERENCES productos_tipo(id_productos_tipo)
+;
+
+ALTER TABLE productos ADD CONSTRAINT "Refproductos_ubicacion57" 
+    FOREIGN KEY (id_productos_ubicacion)
+    REFERENCES productos_ubicacion(id_productos_ubicacion)
+;
+
+
+-- 
+-- TABLE: productos_tipo 
+--
+
+ALTER TABLE productos_tipo ADD CONSTRAINT "Refcomercio49" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: proveedor 
+--
+
+ALTER TABLE proveedor ADD CONSTRAINT "Refcomercio31" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+
+-- 
+-- TABLE: recibo_de_dinero 
+--
+
+ALTER TABLE recibo_de_dinero ADD CONSTRAINT "Refcliente52" 
+    FOREIGN KEY (id_cliente)
+    REFERENCES cliente(id_cliente)
+;
+
+
+-- 
+-- TABLE: recibo_de_dinero_detalle 
+--
+
+ALTER TABLE recibo_de_dinero_detalle ADD CONSTRAINT "Refrecibo_de_dinero51" 
+    FOREIGN KEY (id_recibo_de_dinero)
+    REFERENCES recibo_de_dinero(id_recibo_de_dinero)
+;
+
+ALTER TABLE recibo_de_dinero_detalle ADD CONSTRAINT "Refcuenta53" 
+    FOREIGN KEY (id_cuenta)
+    REFERENCES cuenta(id_cuenta)
+;
+
+
+-- 
+-- TABLE: recibos 
+--
+
+ALTER TABLE recibos ADD CONSTRAINT "Refcliente58" 
+    FOREIGN KEY (id_cliente)
+    REFERENCES cliente(id_cliente)
+;
+
+
+-- 
+-- TABLE: usuario 
+--
+
+ALTER TABLE usuario ADD CONSTRAINT "Refcomercio38" 
+    FOREIGN KEY (id_comercio)
+    REFERENCES comercio(id_comercio)
+;
+
+

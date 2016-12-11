@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="arqueo_de_caja" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="03934df8-9d9c-4612-a245-3ea6e78f9fe1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Proyectos\\JAVA_Comercios\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from cuenta where fecha_date = $P{fecha}]]>
+	</queryString>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="id_cliente" class="java.lang.Integer"/>
+	<field name="id_estado" class="java.lang.Integer"/>
+	<field name="total" class="java.lang.Long"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="exentas" class="java.lang.Long"/>
+	<field name="cinco" class="java.lang.Long"/>
+	<field name="diez" class="java.lang.Long"/>
+	<field name="factura" class="java.lang.String"/>
+	<field name="dinero" class="java.lang.String"/>
+	<field name="vuelto" class="java.lang.String"/>
+	<field name="id_usuario" class="java.lang.String"/>
+	<field name="print" class="java.lang.Integer"/>
+	<field name="id_comercio" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[
+]]></fieldDescription>
+	</field>
+	<field name="fecha_date" class="java.sql.Date"/>
+	<field name="generar_recibo" class="java.lang.Integer"/>
+	<field name="generar_recibo_str" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="45" y="70" width="184" height="15" uuid="5588b91f-44c1-44fe-8660-c8bea938884e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="10" width="80" height="12" uuid="3c56664b-fd7e-4c31-8f5d-3c2267281cd7"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="55" width="97" height="15" uuid="2a380ac7-5a73-41db-b6fd-0096fb023b3c"/>
+				<text><![CDATA[Fecha de arqueo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="40" width="80" height="15" uuid="e98b3871-887a-4cd8-bd3a-d537132c24c2"/>
+				<text><![CDATA[Arqueo de caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="70" width="31" height="15" uuid="fa26b8ff-7753-47eb-97db-8a359d47b0fe"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="525" y="10" width="40" height="12" uuid="b9f445bb-a8f5-4ca0-a7e9-84666da74e19"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="555" height="26" uuid="6ac42591-8f32-4e67-bf46-31cd5f33fda3"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Informe]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="713" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="5" width="555" height="696" uuid="9405bc76-4264-4cad-a3d2-4526d957a945"/>
+				<subreportParameter name="fecha">
+					<subreportParameterExpression><![CDATA[$P{fecha}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["E:\\Proyectos\\JAVA_Comercios\\reportes\\arqueo_de_caja_detalle_contado.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

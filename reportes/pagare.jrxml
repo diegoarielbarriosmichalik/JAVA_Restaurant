@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagare" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ee695a84-5faf-47d6-87fc-e9103263e7ab">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Dell\\Desktop\\Compumundopy\\4kComercios\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="direccion" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from pagares where activa = 1 order by id_pagare]]>
+	</queryString>
+	<field name="id_pagare" class="java.lang.Integer"/>
+	<field name="nro" class="java.lang.Integer"/>
+	<field name="moneda" class="java.lang.String"/>
+	<field name="cantidad" class="java.math.BigDecimal"/>
+	<field name="dia" class="java.lang.String"/>
+	<field name="mes" class="java.lang.String"/>
+	<field name="anho" class="java.lang.String"/>
+	<field name="venc_dia" class="java.lang.String"/>
+	<field name="venc_mes" class="java.lang.String"/>
+	<field name="venc_anho" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="cantidad_letras" class="java.lang.String"/>
+	<field name="recibo_en" class="java.lang.String"/>
+	<field name="recibo_a" class="java.lang.String"/>
+	<field name="interes" class="java.lang.String"/>
+	<field name="comision" class="java.lang.String"/>
+	<field name="desu" class="java.lang.String"/>
+	<field name="borrado" class="java.lang.Integer"/>
+	<field name="activa" class="java.lang.Integer"/>
+	<field name="dia2" class="java.lang.String"/>
+	<field name="mes2" class="java.lang.String"/>
+	<field name="anho2" class="java.lang.String"/>
+	<field name="dia_semana1" class="java.lang.String"/>
+	<field name="dia_semana2" class="java.lang.String"/>
+	<field name="estado" class="java.lang.Integer"/>
+	<field name="nro_str" class="java.lang.String"/>
+	<field name="moneda_short" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="fecha_vencimiento" class="java.sql.Date"/>
+	<field name="interes_int" class="java.lang.Integer"/>
+	<field name="comision_int" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="398" splitType="Stretch">
+			<staticText>
+				<reportElement x="32" y="77" width="534" height="189" uuid="e35b6eec-707c-436e-b592-d30eebed5c79"/>
+				<textElement textAlignment="Justified">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Fecha de emisión:
+Vencimiento:
+El día de vencimiento de este documento, pagaré (mos) libre de gastos y sin protesto a la orden de
+___________________________________________________________________________________,
+la suma de __________________________________________________________________________
+por igual valor recibido a mi  (nuestra) satisfacción, comprometiendo mis (nuestros) bienes propios y/o
+reservados. La falta de pago de este pagaré en fecha de su vencimiento, me (nos) constituirá en mora de
+pleno derecho y producirá el decaimiento de los plazos de todas mis (nuestras) demás obligaciones para
+con el acreedor tomándolas íntegramente exigibles sin necesidad de protesto, ni requerimiento judicial
+alguno, en cuyo caso la totalidad de la deuda devengará un interés moratorio del_______ % mensual
+y un interés punitorio del_________% mensual desde el día de vencimiento hasta el del efectivo pago.
+A todos los efectos legales, me (nos) someto (emos) a la jurisdicción de los juzgados y tribunales de la
+ciudad de Encarnación, constituyéndome (nos) con domicilio especial en Encarnación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="23" width="528" height="24" uuid="5bf16424-f027-45b3-870d-20899146c004"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="16" isBold="true" isItalic="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[PAGARE A LA ORDEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="51" width="17" height="20" uuid="53008383-100d-4de6-baf2-121a91b5304c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="51" width="101" height="20" uuid="33de9526-6366-4bed-9949-631498dc617e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nro_str}.trim()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="51" width="37" height="20" uuid="6c5c414a-2fce-4496-92e0-738a518a02b1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneda_short}.trim()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="454" y="51" width="76" height="20" uuid="5f94a352-6f5d-42f1-8de5-64155f479458"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="374" y="51" width="36" height="20" uuid="305d1ed3-e0c2-4a07-8bb2-1f5bbbcce053"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Por]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="76" width="308" height="15" uuid="8b7f0168-5e38-4d89-a1dc-dfee15549289"/>
+				<textElement>
+					<font fontName="SansSerif" size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dia}.trim() + " de " + $F{mes}.trim() + " del " + $F{anho}.trim()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="91" width="308" height="15" uuid="1bc13db1-d7f3-46ed-aeb0-75137664c0dc"/>
+				<textElement>
+					<font fontName="SansSerif" size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venc_dia}.trim() + " de " + $F{venc_mes}.trim() + " del " + $F{venc_anho}.trim()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="119" width="502" height="15" uuid="e2202534-289d-47a0-87d7-a871da73f962"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}.trim()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="135" width="442" height="15" uuid="d4b93dc5-3a3c-4885-81bc-68e285de3960"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad_letras}.trim()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="168" y="215" width="30" height="15" uuid="2ec55a1f-21ae-4415-8bf7-fdfa9532724f"/>
+				<textElement>
+					<font fontName="SansSerif" size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{interes_int}==0?"":$F{interes_int}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="437" y="201" width="45" height="15" uuid="ef1b1606-ae51-4595-aea0-18e4691b7e62"/>
+				<textElement>
+					<font fontName="SansSerif" size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comision_int}==0?"":$F{comision_int}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="32" y="269" width="534" height="100" uuid="063f3e3c-b69f-4984-8be8-474612b8a130"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{direccion}+"jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

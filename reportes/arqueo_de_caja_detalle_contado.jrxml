@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="arqueo_de_caja_detalle_contado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="69072bc6-c344-43cb-991e-2d8c37b4efdb">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select * from cuenta
+inner join cliente on cliente.id_cliente = cuenta.id_cliente
+inner join recibos on recibos.id_cliente = cliente.id_cliente
+where fecha_date = $P{fecha} and tipo = '1']]>
+	</queryString>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="id_cliente" class="java.lang.Integer"/>
+	<field name="id_estado" class="java.lang.Integer"/>
+	<field name="total" class="java.lang.Long"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="exentas" class="java.lang.Long"/>
+	<field name="cinco" class="java.lang.Long"/>
+	<field name="diez" class="java.lang.Long"/>
+	<field name="factura" class="java.lang.String"/>
+	<field name="dinero" class="java.lang.String"/>
+	<field name="vuelto" class="java.lang.String"/>
+	<field name="id_usuario" class="java.lang.String"/>
+	<field name="print" class="java.lang.Integer"/>
+	<field name="id_comercio" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[
+]]></fieldDescription>
+	</field>
+	<field name="fecha_date" class="java.sql.Date"/>
+	<field name="generar_recibo" class="java.lang.Integer"/>
+	<field name="generar_recibo_str" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="borrado" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="ver_historial" class="java.lang.Integer"/>
+	<field name="cumpleanos" class="java.sql.Date"/>
+	<field name="ci" class="java.math.BigDecimal"/>
+	<field name="borrado_int" class="java.lang.Integer"/>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="ruc_empresa" class="java.lang.String"/>
+	<field name="id_recibo" class="java.lang.Integer"/>
+	<field name="concepto" class="java.lang.String"/>
+	<field name="dinero_entregado" class="java.lang.Integer"/>
+	<field name="dinero_letras" class="java.lang.String"/>
+	<field name="activa" class="java.lang.Integer"/>
+	<variable name="total" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="21" width="545" height="20" forecolor="#FFFFFF" backcolor="#CCCCFF" uuid="c3fd43e8-471f-4a13-aba4-bce734d8f055"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="109" y="24" width="138" height="15" uuid="c1dff7a3-bfe9-4569-a530-6c3b2c2df9ca"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="24" width="100" height="15" uuid="9899cdc7-5731-4565-a971-2b60308c436a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="23" width="79" height="15" uuid="cf51e2e9-508d-4edf-93f3-476724650259"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="4" width="100" height="15" uuid="b735b80e-8871-4984-8069-c7d3defcfd31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas al contado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="100" height="11" uuid="c3dc6c5e-df27-479b-b71e-cd00f362eff9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{factura}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="454" y="0" width="82" height="11" uuid="3aa78b69-32e0-4a5b-8e4a-87e0c617423b"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="0" width="334" height="11" uuid="3fa838b3-9d9c-4b5a-9532-632e303772b3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="163" splitType="Stretch">
+			<subreport>
+				<reportElement x="5" y="24" width="573" height="132" uuid="501a5fb3-659e-4ce1-b8da-e91084a5c1de"/>
+				<subreportParameter name="fecha">
+					<subreportParameterExpression><![CDATA[$P{fecha}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["E:\\Proyectos\\JAVA_Comercios\\reportes\\arqueo_de_caja_detalle_credito.jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="436" y="3" width="100" height="20" uuid="185ea8ed-ef46-48e9-9670-cec1757d5827"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="8" y="2" width="528" height="1" uuid="2338264d-b185-456f-a96b-370f078de532"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

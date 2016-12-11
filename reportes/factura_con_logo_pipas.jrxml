@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d0ff163c-b2bd-4cc8-ac6b-b1bdcfa73157">
+	<property name="ireport.zoom" value="1.026316236461414"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from cuenta
+
+inner join cliente on
+cliente.id_cliente = cuenta.id_cliente
+
+inner join configuracion on
+id_configuracion = '1'
+
+inner join imprimir_cuenta_pie on
+imprimir_cuenta_pie.id_cuenta = cuenta.id_cuenta
+
+ where print = '1']]>
+	</queryString>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="id_cliente" class="java.lang.Integer"/>
+	<field name="id_estado" class="java.lang.Integer"/>
+	<field name="total" class="java.lang.Long"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="exentas" class="java.lang.Long"/>
+	<field name="cinco" class="java.lang.Long"/>
+	<field name="diez" class="java.lang.Long"/>
+	<field name="factura" class="java.lang.String"/>
+	<field name="dinero" class="java.lang.String"/>
+	<field name="vuelto" class="java.lang.String"/>
+	<field name="id_usuario" class="java.lang.String"/>
+	<field name="print" class="java.lang.Integer"/>
+	<field name="id_comercio" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[
+]]></fieldDescription>
+	</field>
+	<field name="fecha_date" class="java.sql.Date"/>
+	<field name="generar_recibo" class="java.lang.Integer"/>
+	<field name="generar_recibo_str" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="borrado" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="ver_historial" class="java.lang.Integer"/>
+	<field name="cumpleanos" class="java.sql.Date"/>
+	<field name="ci" class="java.math.BigDecimal"/>
+	<field name="borrado_int" class="java.lang.Integer"/>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="ruc_empresa" class="java.lang.String"/>
+	<field name="id_configuracion" class="java.lang.Integer"/>
+	<field name="imagenes" class="java.lang.Integer"/>
+	<field name="precio_automatico" class="java.lang.Integer"/>
+	<field name="porcentaje" class="java.lang.Integer"/>
+	<field name="barcode" class="java.lang.Integer"/>
+	<field name="peso" class="java.lang.Integer"/>
+	<field name="dolar" class="java.lang.Integer"/>
+	<field name="real_moneda" class="java.lang.Integer"/>
+	<field name="libreta" class="java.lang.Integer"/>
+	<field name="conexion" class="java.lang.Integer"/>
+	<field name="timbrado" class="java.math.BigDecimal"/>
+	<field name="timbrado_vencimiento" class="java.sql.Date"/>
+	<field name="timbrado_inicio_vigencia" class="java.sql.Date"/>
+	<field name="pedidos" class="java.lang.Integer"/>
+	<field name="habilitar_pagado_en_cuenta_detalle" class="java.lang.Integer"/>
+	<field name="alerta_stock" class="java.lang.Integer"/>
+	<field name="ventas_a_credito" class="java.lang.Integer"/>
+	<field name="habilitar_facturacion" class="java.lang.Integer"/>
+	<field name="productos_por_factura" class="java.lang.Integer"/>
+	<field name="habilitar_medio_de_pago" class="java.lang.Integer"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="iva0" class="java.math.BigDecimal"/>
+	<field name="iva5" class="java.math.BigDecimal"/>
+	<field name="iva10" class="java.math.BigDecimal"/>
+	<field name="total_letras" class="java.lang.String"/>
+	<field name="total_iva" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="419" splitType="Stretch">
+			<subreport>
+				<reportElement x="19" y="178" width="563" height="159" uuid="48017539-af78-4691-a292-add048a1f992"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{direccion}+"jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="95" y="118" width="182" height="15" uuid="5582f42e-3f0a-4490-b998-cf779ec02f32"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="134" width="364" height="15" uuid="f468bc12-6a81-4a93-9bbe-9c41b5e34b6a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="149" width="265" height="15" uuid="a2b81ed5-50d8-403d-807a-164a1cffe3b1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="136" width="104" height="15" uuid="fa28e6b5-d6f5-4bcc-a164-ef8cbaa83af0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="491" y="117" width="14" height="17" uuid="98cc42a1-16dd-4797-974f-ac7fd1e202b6"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="365" width="531" height="15" uuid="7b93185d-64c4-438c-997b-4bb9001e8c13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_letras}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="519" y="380" width="49" height="15" uuid="ecb7bab9-e825-466a-b906-01dcd0090f44"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_iva}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="370" y="380" width="40" height="15" uuid="c5882945-ceb7-4320-b58b-79ea7a6f39ad"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iva5}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="424" y="380" width="40" height="15" uuid="fd2e5e23-e389-4796-a6c5-971370201ce9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iva10}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="519" y="350" width="49" height="15" uuid="3b7bbfd7-86dc-4466-9824-fb0d2da68540"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="423" splitType="Stretch">
+			<line>
+				<reportElement x="12" y="3" width="570" height="1" uuid="b3e3f358-217f-4a97-acd7-4a1cebd8a113"/>
+			</line>
+			<textField>
+				<reportElement x="67" y="134" width="265" height="15" uuid="9fc2d6d9-dd56-42fe-9695-cca06bac6df1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="95" y="103" width="182" height="15" uuid="4cf28021-b452-4a10-b9b9-8ec5182c011c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="119" width="364" height="15" uuid="8708c6c9-89a4-458b-aeb8-2cfecea4a37b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="121" width="104" height="15" uuid="db5dd6f8-3098-4f09-8e18-4bada9a9cf39"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="491" y="102" width="14" height="17" uuid="77378d92-e295-42fd-99aa-74525d23f2e6"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="19" y="163" width="563" height="159" uuid="760092e5-a695-431b-b4fb-f4b46ce62870"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{direccion}+"jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

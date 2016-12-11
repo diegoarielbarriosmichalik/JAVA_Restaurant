@@ -1,0 +1,108 @@
+
+PIPAS
+
+Agregar a la BD
+configuraciones
+    pedidos
+    habilitar_pagado_en_cuenta_detalle
+    alerta_stock
+    ventas_a_credito
+    habilitar_facturacion
+    productos_por_factura
+
+cliente
+    borrado_int
+    empresa
+    ruc_empresa
+
+productos
+    porcentaje
+
+cuenta
+    generar_recibo
+    generar_recibo_str
+
+ALTER TABLE cuenta ALTER COLUMN factura TYPE character(100) USING (factura::character(100));
+
+imprimir_cuenta_pie total_iva cambiar a numeric 
+
+configuracion agregar habilitar_medio_de_pago int
+
+
+cuenta_detalle
+    pagado
+    pagado_str  
+
+
+
+agregar a la base de datos
+
+estado
+8 caja cerrada
+9 presupuesto
+10 facturada
+11 anulada
+
+productos_tipo agregar "varios" id "0"
+
+
+
+Sentencias SQL 
+
+CREATE TABLE control_de_acceso(
+    id_control               int4              NOT NULL,
+    id_usuario               int4              NOT NULL,
+    ventas                   int4,
+    caja                     int4,
+    informes                 int4,
+    compras                  int4,
+    clientes                 int4,
+    productos                int4,
+    proveedores              int4,
+    sucursal_numero          char(3),
+    caja_numero              char(3),
+    privilegio               int4,
+    ultima_factura           numeric(10, 0),
+    habilitar_facturacion    int4,
+    CONSTRAINT "PK49" PRIMARY KEY (id_control)
+)
+;
+
+
+-- 
+-- TABLE: control_de_acceso 
+--
+
+ALTER TABLE control_de_acceso ADD CONSTRAINT "Refusuario50" 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuario(id_usuario)
+;
+
+
+CREATE TABLE reporte_balance_compras_ventas_por_facturas(
+    id             int4              NOT NULL,
+    fecha          date,
+    comprobante    char(100),
+    descripcion    char(200),
+    compras        numeric(10, 0),
+    ventas         numeric(10, 0),
+    CONSTRAINT "PK48" PRIMARY KEY (id)
+)
+;
+
+
+CREATE TABLE imprimir_cuenta_pie(
+    id              int4              NOT NULL,
+    id_cuenta       int4,
+    iva0            numeric(10, 0),
+    iva5            numeric(10, 0),
+    iva10           numeric(10, 0),
+    total           numeric(10, 0),
+    total_letras    char(200),
+    total_iva       char(200),
+    CONSTRAINT "PK47" PRIMARY KEY (id)
+)
+;
+
+
+// pipas 

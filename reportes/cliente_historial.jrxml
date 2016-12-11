@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cliente_historial" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="46c69457-6580-49a1-b7ba-3f2670e8696e">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_cliente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cliente.nombre as cliente, productos.nombre as producto, cuenta.fecha_date as fecha, cuenta_detalle.diez,cuenta_detalle.cinco, cuenta_detalle.exentas
+from cuenta
+inner join cuenta_detalle on
+cuenta.id_cuenta = cuenta_detalle.id_cuenta
+inner join cliente on
+cliente.id_cliente = cuenta.id_cliente
+inner join productos on
+productos.id_producto = cuenta_detalle.id_producto
+where cuenta.id_cliente = $P{id_cliente}
+and cuenta.id_estado != '11']]>
+	</queryString>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="producto" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="diez" class="java.lang.Long"/>
+	<field name="cinco" class="java.lang.Long"/>
+	<field name="exentas" class="java.lang.Long"/>
+	<variable name="total" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{diez}+$F{cinco}+$F{exentas}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="30" uuid="8b272d0f-a710-4eac-9fe4-288857789562"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="43" width="100" height="15" uuid="04bca55b-55ae-4edf-9e03-aebe00b1bbfe"/>
+				<text><![CDATA[Historial del cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="58" width="37" height="15" uuid="a3d3a7c5-ab21-445c-bdc9-df08b2f2c1c9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="63" y="58" width="131" height="15" uuid="78aad23e-6323-431c-80da-b45f4cd81d72"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="73" width="37" height="15" uuid="0c04d257-cb13-41c1-8fe0-aaf08fa80106"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="73" width="258" height="15" uuid="b142dc75-c6de-436f-aa48-9de33e8a22c3"/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement x="94" y="2" width="138" height="15" uuid="0ab2892f-9ed8-40d8-a7d6-3b2e9bccc2b2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto	]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="1" width="545" height="1" uuid="19fdf3b0-a794-477a-8a05-007445c4330f"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="2" width="51" height="15" uuid="abe2ba4d-1dc5-4417-96e4-6e24b0b99f07"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha		]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="15" width="545" height="1" uuid="aa293dee-b1fc-4e8e-adb2-646ab3321812"/>
+			</line>
+			<staticText>
+				<reportElement x="496" y="3" width="29" height="15" uuid="9e7920c3-bbdb-40e9-a355-9518924ee9fa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="12" y="0" width="82" height="12" uuid="d877cd59-e0e1-44f9-a4f8-c9a65db9560f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="0" width="257" height="12" uuid="13471f37-f60a-4e92-ae4b-e598fe33750a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement x="419" y="0" width="106" height="12" uuid="6339ac79-45d8-4c75-ac0e-4596a7335abc"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diez}+$F{cinco}+$F{exentas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="425" y="4" width="100" height="15" uuid="9a1eac7e-36cc-4fa8-990b-c26d11e2ac2c"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="5" y="1" width="545" height="1" uuid="47e17726-cc40-4381-adb9-892eb904d85c"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
